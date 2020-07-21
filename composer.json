@@ -1,0 +1,19 @@
+{
+  "name": "suntech_intram/paycfa",
+  "description": "Permet aux entreprises et aux particuliers de recevoir des paiements par mobile money, carte de crédit et compte bancaire en toute sécurité.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Suntech Devs",
+      "email": "suntechdevs@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {"suntech_intram\\PayCfa\\": "src/"}
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  }
+}
