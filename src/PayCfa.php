@@ -7,9 +7,9 @@
  */
 
 
-namespace suntech\PayCfa;
+namespace suntechintram\PayCfa;
 
-class PayCfa
+class Functions
 {
     // Public Api key
     private $public_key;

@@ -16,7 +16,7 @@ class ComposerStaticInit58fa9abec47dd30ab9634c7e30c5fcaa
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
-            'suntech\\PayCfa\\' => 15,
+            'suntechintram\\PayCfa\\' => 21,
         ),
         'P' => 
         array (
@@ -32,7 +32,7 @@ class ComposerStaticInit58fa9abec47dd30ab9634c7e30c5fcaa
     );
 
     public static $prefixDirsPsr4 = array (
-        'suntech\\PayCfa\\' => 
+        'suntechintram\\PayCfa\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
