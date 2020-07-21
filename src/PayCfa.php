@@ -7,7 +7,7 @@
  */
 
 
-require dirname( __DIR__ ). '/vendor/autoload.php';
+namespace suntech\PayCfa;
 
 class PayCfa
 {
