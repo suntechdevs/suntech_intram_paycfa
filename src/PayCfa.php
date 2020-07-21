@@ -6,7 +6,6 @@
  * Time: 13:47
  */
 
-namespace PayCfa;
 
 require dirname( __DIR__ ). '/vendor/autoload.php';
 
