@@ -42,6 +42,9 @@ class Functions
     private $logoUrlStore;
     private $webSiteUrlStore;
 
+    private $BASE_URL = "http://localhost/intram_test/";
+
+
     /**
      * PayCfa constructor.
      * @param $public_key
@@ -56,7 +59,7 @@ class Functions
         $this->secret = $secret;
         $this->sandbox = $sandbox;
         $this->curl = new \GuzzleHttp\Client();
-        $this->const = \Constant::BASE_URL;
+        $this->const = $this->BASE_URL;
 
         $this->redirectionUrl=null;
         $this->items=[];
