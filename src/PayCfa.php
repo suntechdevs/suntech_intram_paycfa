@@ -41,8 +41,12 @@ class Functions
     private $phoneStore;
     private $logoUrlStore;
     private $webSiteUrlStore;
+    private $header;
 
-    private $BASE_URL = "http://localhost/intram_test/";
+    private $BASE_URL = "http://localhost:8002/api/";
+    private $verify_URL = "getvalue";
+    private $setPayout_URL = "getvalue";
+    private $refund_URL = "getvalue";
 
 
     /**
@@ -61,120 +65,145 @@ class Functions
         $this->curl = new \GuzzleHttp\Client();
         $this->const = $this->BASE_URL;
 
-        $this->redirectionUrl=null;
-        $this->items=[];
-        $this->amount=0;
-        $this->devise=null;
-        $this->cancelUrl=null;
-        $this->returnUrl=null;
-        $this->generateUrl=null;
-        $this->tvaAmount=0;
-        $this->description=null;
-        $this->nameStore=null;
-        $this->phoneStore=null;
-        $this->logoUrlStore=null;
-        $this->webSiteUrlStore=null;
+        $this->redirectionUrl = null;
+        $this->items = [];
+        $this->amount = 0;
+        $this->devise = null;
+        $this->cancelUrl = null;
+        $this->returnUrl = null;
+        $this->generateUrl = null;
+        $this->tvaAmount = 0;
+        $this->description = null;
+        $this->nameStore = null;
+        $this->phoneStore = null;
+        $this->logoUrlStore = null;
+        $this->webSiteUrlStore = null;
 
+        $this->header = [
+            'Content-Type: Application/json',
+            'S-API-KEY' => $this->public_key,
+            'S-PRIVATE-KEY' => $this->private_key,
+            'S-SECRET-KEY' => $this->secret
+        ];
 
     }
 
-    public function verify($transactionId){
-        $response = null;
-        try{
+    public function verify($transactionId)
+    {
 
+        $reponse = null;
+        $invoice = array("transactionId" => $transactionId, "sandbox" => $this->sandbox);
 
-            $response = $this->curl->post($this->const. '/api/v1/transactions/status', array(
-                "json" => array("transactionId" => $transactionId, "sandbox"=> $this->sandbox),
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'S-API-KEY' => $this->public_key,
-                    'S-PRIVATE-KEY' => $this->private_key,
-                    'S-SECRET-KEY' => $this->secret
-                ]
+        try {
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->BASE_URL . $this->verify_URL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
+                CURLOPT_HTTPHEADER => $this->header
             ));
 
-            $response = $response->getBody();
-        }catch (\Exception $e){
-            $response = json_encode(array( "status" => "error"));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+                $response = "cURL Error #:" . $err;
+            }
+
+        } catch (\Exception $e) {
+            $response = json_encode(array("status" => "error"));
         }
-        return json_decode((string)$response);
+        return json_encode($response);
+
     }
 
 
-    public function setPayout(){
+    public function setPayout()
+    {
         $reponse = null;
 
-        try{
+        try {
 
             $invoice = null;
             $invoice = [
                 "items" => $this->getItems(),
-                "taxes" => ["name"=>"tva","amount"=>$this->tvaAmount],
+                "taxes" => ["name" => "tva", "amount" => $this->tvaAmount],
                 "amount" => $this->getAmount(),
                 "description" => $this->getDescription(),
                 "action" => [
-                    "cancel_url"=>$this->getCancelUrl(),
-                    "return_url"=>$this->getReturnUrl(),
-                    "callback_url"=>$this->getRedirectionUrl()
-                    ],
+                    "cancel_url" => $this->getCancelUrl(),
+                    "return_url" => $this->getReturnUrl(),
+                    "callback_url" => $this->getRedirectionUrl()
+                ],
                 "store" => [
-                    "name"=>$this->getNameStore(),
-                    "postal_adress"=>$this->getPostalAdressStore(),
-                    "logo_url"=>$this->getLogoUrlStore(),
-                    "web_site_url"=>$this->getWebSiteUrlStore(),
-                    "phone"=>$this->getPhoneStore()
+                    "name" => $this->getNameStore(),
+                    "postal_adress" => $this->getPostalAdressStore(),
+                    "logo_url" => $this->getLogoUrlStore(),
+                    "web_site_url" => $this->getWebSiteUrlStore(),
+                    "phone" => $this->getPhoneStore()
                 ]
             ];
 
+            $curl = curl_init();
 
-
-            $response = $this->curl->post($this->const. 'test.php', array(
-                "json" => array(
-                    "invoice" => \GuzzleHttp\json_encode($invoice),
-                    "sandbox"=> $this->sandbox
-                ),
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'S-API-KEY' => $this->public_key,
-                    'S-PRIVATE-KEY' => $this->private_key,
-                    'S-SECRET-KEY' => $this->secret
-                ]
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->BASE_URL . $this->setPayout_URL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
+                CURLOPT_HTTPHEADER => $this->header
             ));
 
-            $response = $response->getBody();
-        }catch (\Exception $e){
-            $response = json_encode(array( "status" => "error"));
-        }
-        return json_decode((string)$response);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
+            curl_close($curl);
 
-
-        /*try{
-
-            $const = $this->sandbox ? Constants::SANDBOX_URL : Constants::BASE_URL;
-
-            $response = $this->curl->post($const. '/merchant/payouts/schedule', array(
-                "json" => $options,
-                'headers' => [
-                    'Accept'     => 'application/json',
-                    'X-API-KEY'      => $this->public_key,
-                    'X-PRIVATE-API-KEY'      => $this->private_key,
-                    'X-SECRET-API-KEY'      => $this->secret,
-                ]
-            ));
-
-            $reponse = $response->getBody();
-            return json_decode((string)$reponse);
-
-        }
-        catch (RequestException $e){
-            if ($e->hasResponse()) {
-                $reponse = "{".$this->get_string_between(Psr7\str($e->getResponse()), "{","}")."}";
-                return json_decode((string)$reponse);
+            if ($err) {
+                $response = "cURL Error #:" . $err;
             }
-            $reponse = json_encode(array( "status" => STATUS::FAILED));
-            return json_decode((string)$response);
-        }*/
+
+        } catch (\Exception $e) {
+            $response = json_encode(array("status" => "error"));
+        }
+        return json_encode($response);
+    }
+
+
+    public function refund($transactionId){
+        $reponse = null;
+        $invoice = array("transactionId" => $transactionId, "sandbox" => $this->sandbox);
+
+        try {
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->BASE_URL . $this->refund_URL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
+                CURLOPT_HTTPHEADER => $this->header
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+                $response = "cURL Error #:" . $err;
+            }
+
+        } catch (\Exception $e) {
+            $response = json_encode(array("status" => "error"));
+        }
+        return json_encode($response);
     }
 
     /**
@@ -208,7 +237,6 @@ class Functions
     {
         $this->description = $description;
     }
-
 
 
     /**
@@ -498,10 +526,6 @@ class Functions
     {
         $this->webSiteUrlStore = $webSiteUrlStore;
     }
-
-
-
-
 
 
 }
