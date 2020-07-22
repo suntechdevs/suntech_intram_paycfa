@@ -42,6 +42,7 @@ class Functions
     private $logoUrlStore;
     private $webSiteUrlStore;
     private $header;
+    private $keys;
 
     private $BASE_URL = "http://localhost:8002/api/";
     private $verify_URL = "getvalue";
@@ -81,10 +82,15 @@ class Functions
 
         $this->header = [
             'Content-Type: Application/json',
-            'S-API-KEY' => $this->public_key,
-            'S-PRIVATE-KEY' => $this->private_key,
-            'S-SECRET-KEY' => $this->secret
         ];
+
+        $this->keys = [
+            'public' => $this->public_key,
+            'private' => $this->private_key,
+            'secret' => $this->secret
+        ];
+
+
 
     }
 
@@ -92,7 +98,11 @@ class Functions
     {
 
         $reponse = null;
-        $invoice = array("transactionId" => $transactionId, "sandbox" => $this->sandbox);
+        $invoice = array(
+            "transactionId" => $transactionId,
+            "sandbox" => $this->sandbox,
+            "keys" => $this->keys
+        );
 
         try {
 
@@ -131,6 +141,7 @@ class Functions
 
             $invoice = null;
             $invoice = [
+                "keys" => $this->keys,
                 "items" => $this->getItems(),
                 "taxes" => ["name" => "tva", "amount" => $this->tvaAmount],
                 "amount" => $this->getAmount(),
@@ -177,7 +188,11 @@ class Functions
 
     public function refund($transactionId){
         $reponse = null;
-        $invoice = array("transactionId" => $transactionId, "sandbox" => $this->sandbox);
+        $invoice = array(
+            "transactionId" => $transactionId,
+            "keys" => $this->keys,
+            "sandbox" => $this->sandbox
+        );
 
         try {
 
