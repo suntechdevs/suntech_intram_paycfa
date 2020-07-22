@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/PayCfa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PayCfa.php" afterDir="false" />
-    </list>
+    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +26,11 @@
       <file leaf-file-name="PayCfa.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PayCfa.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6855">
-              <caret line="486" column="1" selection-start-line="486" selection-start-column="1" selection-end-line="486" selection-end-column="1" />
+            <state relative-caret-position="8604">
+              <caret line="530" column="1" selection-start-line="530" selection-start-column="1" selection-end-line="530" selection-end-column="1" />
               <folding>
-                <element signature="e#2834#3036#1#PHP" />
-                <element signature="e#3065#3388#1#PHP" />
+                <element signature="e#1047#2029#0#PHP" />
+                <element signature="e#3090#3916#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -142,16 +140,15 @@
       <option name="presentableId" value="Default" />
       <updated>1595334928063</updated>
       <workItem from="1595334929456" duration="7315000" />
-      <workItem from="1595364832207" duration="8660000" />
+      <workItem from="1595364832207" duration="9545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15975000" />
+    <option name="totallyTimeSpent" value="16860000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="103" y="27" width="1044" height="657" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13827655" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -162,7 +159,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.0" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.46615088" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -200,8 +197,8 @@
         <state relative-caret-position="2304">
           <caret line="128" column="65" selection-start-line="128" selection-start-column="65" selection-end-line="128" selection-end-column="65" />
           <folding>
-            <element signature="e#2834#3036#1#PHP" />
-            <element signature="e#3065#3388#1#PHP" />
+            <element signature="e#1047#2029#0#PHP" />
+            <element signature="e#3090#3916#0#PHP" />
           </folding>
         </state>
       </provider>
@@ -225,11 +222,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PayCfa.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6855">
-          <caret line="486" column="1" selection-start-line="486" selection-start-column="1" selection-end-line="486" selection-end-column="1" />
+        <state relative-caret-position="8604">
+          <caret line="530" column="1" selection-start-line="530" selection-start-column="1" selection-end-line="530" selection-end-column="1" />
           <folding>
-            <element signature="e#2834#3036#1#PHP" />
-            <element signature="e#3065#3388#1#PHP" />
+            <element signature="e#1047#2029#0#PHP" />
+            <element signature="e#3090#3916#0#PHP" />
           </folding>
         </state>
       </provider>
