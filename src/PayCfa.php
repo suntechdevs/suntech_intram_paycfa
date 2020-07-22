@@ -62,7 +62,7 @@ class Functions
         $this->public_key = $public_key;
         $this->private_key = $private_key;
         $this->secret = $secret;
-        $this->sandbox = $sandbox;
+        $this->sandbox = $sandbox ? "sandbox" : "live";
         $this->curl = new \GuzzleHttp\Client();
         $this->const = $this->BASE_URL;
 

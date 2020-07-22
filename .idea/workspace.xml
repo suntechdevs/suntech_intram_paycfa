@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +9,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
@@ -28,10 +26,11 @@
       <file leaf-file-name="PayCfa.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PayCfa.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="85" column="40" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
+            <state relative-caret-position="-3">
+              <caret line="188" column="43" lean-forward="true" selection-start-line="188" selection-start-column="43" selection-end-line="188" selection-end-column="43" />
               <folding>
-                <element signature="e#3090#3916#0#PHP" />
+                <element signature="e#2035#2956#0#PHP" />
+                <element signature="e#2963#4665#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -83,6 +82,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -99,7 +99,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -133,14 +132,15 @@
       <updated>1595334928063</updated>
       <workItem from="1595334929456" duration="7315000" />
       <workItem from="1595364832207" duration="10248000" />
+      <workItem from="1595433034527" duration="2690000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17563000" />
+    <option name="totallyTimeSpent" value="20253000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="103" y="27" width="1044" height="657" extended-state="0" />
+    <frame x="103" y="27" width="1044" height="657" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14128256" />
@@ -152,7 +152,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.46435452" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.46421662" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -183,7 +183,8 @@
         <state relative-caret-position="1872">
           <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
           <folding>
-            <element signature="e#3090#3916#0#PHP" />
+            <element signature="e#2035#2956#0#PHP" />
+            <element signature="e#2963#4665#0#PHP" />
           </folding>
         </state>
       </provider>
@@ -201,7 +202,8 @@
         <state relative-caret-position="2304">
           <caret line="128" column="65" selection-start-line="128" selection-start-column="65" selection-end-line="128" selection-end-column="65" />
           <folding>
-            <element signature="e#3090#3916#0#PHP" />
+            <element signature="e#2035#2956#0#PHP" />
+            <element signature="e#2963#4665#0#PHP" />
           </folding>
         </state>
       </provider>
@@ -219,10 +221,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PayCfa.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="85" column="40" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
+        <state relative-caret-position="-3">
+          <caret line="188" column="43" lean-forward="true" selection-start-line="188" selection-start-column="43" selection-end-line="188" selection-end-column="43" />
           <folding>
-            <element signature="e#3090#3916#0#PHP" />
+            <element signature="e#2035#2956#0#PHP" />
+            <element signature="e#2963#4665#0#PHP" />
           </folding>
         </state>
       </provider>
