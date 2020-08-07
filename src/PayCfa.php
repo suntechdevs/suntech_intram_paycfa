@@ -20,6 +20,9 @@ class Functions
     // Account Secret
     private $secret;
 
+    // Account Marchand
+    private $marchand_id;
+
 
     private $sandbox;
 
@@ -43,10 +46,12 @@ class Functions
     private $webSiteUrlStore;
     private $header;
     private $keys;
+    private $currency;
 
-    private $BASE_URL = "http://localhost:8002/api/";
-    private $verify_URL = "getvalue";
-    private $setPayout_URL = "getvalue";
+    private $BASE_URL = "http://192.168.8.112:4200/api/v1/";
+    private $BASE_URLSANBOX = "http://192.168.8.112:4200/api/v1/";
+    private $verify_URL = "/transactions/confirm/";
+    private $setPayout_URL = "payments/request";
     private $refund_URL = "getvalue";
 
 
@@ -57,14 +62,15 @@ class Functions
      * @param $secret
      * @param $sandbox
      */
-    public function __construct($public_key, $private_key, $secret, $sandbox)
+    public function __construct($public_key, $private_key, $secret, $marchand_id, $sandbox)
     {
         $this->public_key = $public_key;
         $this->private_key = $private_key;
         $this->secret = $secret;
+        $this->const = !$sandbox?$this->BASE_URL:$this->BASE_URLSANBOX;
         $this->sandbox = $sandbox ? "sandbox" : "live";
         $this->curl = new \GuzzleHttp\Client();
-        $this->const = $this->BASE_URL;
+        $this->marchand_id = $marchand_id;
 
         $this->redirectionUrl = null;
         $this->items = [];
@@ -81,7 +87,11 @@ class Functions
         $this->webSiteUrlStore = null;
 
         $this->header = [
-            'Content-Type: Application/json',
+            "X-API-KEY:" . $this->public_key,
+            "X-PRIVATE-KEY: " . $this->private_key,
+            "X-SECRET-KEY:" . $this->secret,
+            "X-MARCHAND-KEY: " . $this->marchand_id,
+            'Content-Type: Application/json'
         ];
 
         $this->keys = [
@@ -91,28 +101,22 @@ class Functions
         ];
 
 
-
     }
 
-    public function verify($transactionId)
+    public function getTransactionStatus($transactionId)
     {
 
         $reponse = null;
-        $invoice = array(
-            "transactionId" => $transactionId,
-            "sandbox" => $this->sandbox,
-            "keys" => $this->keys
-        );
 
         try {
 
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->BASE_URL . $this->verify_URL,
+                CURLOPT_URL => $this->const . $this->verify_URL."".$transactionId,
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_PORT => 4200,
                 CURLOPT_HTTPHEADER => $this->header
             ));
 
@@ -121,19 +125,20 @@ class Functions
 
             curl_close($curl);
 
+
             if ($err) {
-                $response = "cURL Error #:" . $err;
+                $response = json_encode(array("error" => "true","message"=>err));;
             }
 
         } catch (\Exception $e) {
-            $response = json_encode(array("status" => "error"));
+            $response = json_encode(array("error" => "true"));
         }
-        return json_encode($response);
+        return $response;
 
     }
 
 
-    public function setPayout()
+    public function setRequestPayment()
     {
         $reponse = null;
 
@@ -142,6 +147,7 @@ class Functions
             $invoice = null;
             $invoice = [
                 "keys" => $this->keys,
+                "currency" => $this->getCurrency(),
                 "items" => $this->getItems(),
                 "taxes" => ["name" => "tva", "amount" => $this->tvaAmount],
                 "amount" => $this->getAmount(),
@@ -163,10 +169,10 @@ class Functions
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->BASE_URL . $this->setPayout_URL,
+                CURLOPT_URL => $this->const . $this->setPayout_URL,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
+                CURLOPT_POSTFIELDS => json_encode(["invoice" => $invoice]),
                 CURLOPT_HTTPHEADER => $this->header
             ));
 
@@ -176,50 +182,33 @@ class Functions
             curl_close($curl);
 
             if ($err) {
-                $response = "cURL Error #:" . $err;
+                $response = json_encode(array("error" => "true","message"=>err));;
             }
 
         } catch (\Exception $e) {
-            $response = json_encode(array("status" => "error"));
+            $response = json_encode(array("error" => "true"));
         }
-        return json_encode($response);
+        return $response;
     }
 
 
-    public function refund($transactionId){
-        $reponse = null;
-        $invoice = array(
-            "transactionId" => $transactionId,
-            "keys" => $this->keys,
-            "sandbox" => $this->sandbox
-        );
-
-        try {
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->BASE_URL . $this->refund_URL,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode(["invoice"=>$invoice]),
-                CURLOPT_HTTPHEADER => $this->header
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-                $response = "cURL Error #:" . $err;
-            }
-
-        } catch (\Exception $e) {
-            $response = json_encode(array("status" => "error"));
-        }
-        return json_encode($response);
+    /**
+     * @return mixed
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
+
+    /**
+     * @param mixed $currency
+     */
+    public function setCurrency($currency): void
+    {
+        $this->currency = $currency;
+    }
+
+
 
     /**
      * @return int
