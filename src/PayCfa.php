@@ -9,7 +9,7 @@
 
 namespace suntechintram\PayCfa;
 
-class Functions
+class PayCfa
 {
     // Public Api key
     private $public_key;
@@ -47,6 +47,7 @@ class Functions
     private $header;
     private $keys;
     private $currency;
+    private $template;
 
     private $BASE_URL = "http://192.168.8.112:4200/api/v1/";
     private $BASE_URLSANBOX = "http://192.168.8.112:4200/api/v1/";
@@ -127,7 +128,7 @@ class Functions
 
 
             if ($err) {
-                $response = json_encode(array("error" => "true","message"=>err));;
+                $response = json_encode(array("error" => "true","message"=>$err));;
             }
 
         } catch (\Exception $e) {
@@ -145,26 +146,31 @@ class Functions
         try {
 
             $invoice = null;
+            $actions = null;
+            $store = null;
             $invoice = [
                 "keys" => $this->keys,
                 "currency" => $this->getCurrency(),
                 "items" => $this->getItems(),
                 "taxes" => ["name" => "tva", "amount" => $this->tvaAmount],
                 "amount" => $this->getAmount(),
-                "description" => $this->getDescription(),
-                "action" => [
-                    "cancel_url" => $this->getCancelUrl(),
-                    "return_url" => $this->getReturnUrl(),
-                    "callback_url" => $this->getRedirectionUrl()
-                ],
-                "store" => [
-                    "name" => $this->getNameStore(),
-                    "postal_adress" => $this->getPostalAdressStore(),
-                    "logo_url" => $this->getLogoUrlStore(),
-                    "web_site_url" => $this->getWebSiteUrlStore(),
-                    "phone" => $this->getPhoneStore()
-                ]
+                "description" => $this->getDescription()
             ];
+            $actions = [
+                "cancel_url" => $this->getCancelUrl(),
+                "return_url" => $this->getReturnUrl(),
+                "callback_url" => $this->getRedirectionUrl()
+            ];
+
+            $store = [
+                "name" => $this->getNameStore(),
+                "postal_adress" => $this->getPostalAdressStore(),
+                "logo_url" => $this->getLogoUrlStore(),
+                "web_site_url" => $this->getWebSiteUrlStore(),
+                "phone" => $this->getPhoneStore(),
+                "template" => $this->getTemplate()
+            ];
+
 
             $curl = curl_init();
 
@@ -172,7 +178,7 @@ class Functions
                 CURLOPT_URL => $this->const . $this->setPayout_URL,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode(["invoice" => $invoice]),
+                CURLOPT_POSTFIELDS => json_encode(["invoice" => $invoice,"store"=>$store,"actions"=>$actions]),
                 CURLOPT_HTTPHEADER => $this->header
             ));
 
@@ -182,7 +188,7 @@ class Functions
             curl_close($curl);
 
             if ($err) {
-                $response = json_encode(array("error" => "true","message"=>err));;
+                $response = json_encode(array("error" => "true","message"=>$err));;
             }
 
         } catch (\Exception $e) {
@@ -203,7 +209,7 @@ class Functions
     /**
      * @param mixed $currency
      */
-    public function setCurrency($currency): void
+    public function setCurrency($currency)
     {
         $this->currency = $currency;
     }
@@ -530,6 +536,23 @@ class Functions
     {
         $this->webSiteUrlStore = $webSiteUrlStore;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param mixed $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    }
+
 
 
 }
