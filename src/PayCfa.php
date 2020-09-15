@@ -128,11 +128,11 @@ class PayCfa
 
 
             if ($err) {
-                $response = json_encode(array("error" => "true","message"=>$err));;
+                $response = json_encode(array("error" => true,"message"=>$err));;
             }
 
         } catch (\Exception $e) {
-            $response = json_encode(array("error" => "true"));
+            $response = json_encode(array("error" => true));
         }
         return $response;
 
@@ -188,11 +188,11 @@ class PayCfa
             curl_close($curl);
 
             if ($err) {
-                $response = json_encode(array("error" => "true","message"=>$err));;
+                $response = json_encode(array("error" => true,"message"=>$err));;
             }
 
         } catch (\Exception $e) {
-            $response = json_encode(array("error" => "true"));
+            $response = json_encode(array("error" => true));
         }
         return $response;
     }
