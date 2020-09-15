@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/PayCfa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PayCfa.php" afterDir="false" />
-    </list>
+    <list default="true" id="f77a2adc-6b8a-4377-a0d0-ba23decc5e31" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +50,7 @@
     <findStrings>
       <find>cur</find>
       <find>curr</find>
+      <find>&quot;error&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,12 +160,12 @@
       <workItem from="1596819226683" duration="2770000" />
       <workItem from="1597048536463" duration="67000" />
       <workItem from="1600097007382" duration="5010000" />
-      <workItem from="1600160507965" duration="7956000" />
+      <workItem from="1600160507965" duration="8590000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39911000" />
+    <option name="totallyTimeSpent" value="40545000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="685" extended-state="6" />
